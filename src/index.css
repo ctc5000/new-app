@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.FollowersList {
+list-style:none;
+
+}
+.FollowersList li {
+    cursor:pointer;
+}
+.FollowersInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid 2px #eee;
+    width: 100%;
+}
+.FollowersInfo img {
+width:50%;
+}
+.FollowersInfo .FoloverCard {
+    width: 50%;
+}
+.FoloverCard p {
+border: solid 2px #eee;
+}
