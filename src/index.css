@@ -1,37 +1,100 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.FollowersList {
-list-style:none;
+
+.FormGit {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    flex-wrap: wrap;
 
 }
-.FollowersList li {
-    cursor:pointer;
+
+.FormGit form {
+    width: 100%;
 }
+
+.FormGit label {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.FollowersList {
+    list-style: none;
+    width: 30%;
+    text-align: left;
+
+}
+
+.FollowersList li {
+    cursor: pointer;
+}
+
 .FollowersInfo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     border: solid 2px #eee;
-    width: 100%;
+    width: 30%;
     height: auto;
 }
+
 .FollowersInfo img {
-width:50%;
+    width: 50%;
+    height: 200px;
 }
+
 .FollowersInfo .FoloverCard {
     width: 50%;
+
 }
+
 .FoloverCard p {
-border: solid 2px #eee;
+    border: solid 2px #eee;
+}
+
+.UserMiniCard {
+    width: 30%;
+}
+
+.UserMiniCard .FoloverCard {
+    width: 70%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.FoloverCard li {
+    border: solid 2px #eee;
+}
+
+.followers_list_title {
+    font-size: 37px;
+    line-height: 0;
+}
+
+.UserMiniCard {
+    display: flex;
+    flex-direction: row;
+}
+
+.UserMiniCard img {
+
+    height: 200px;
+    width: 30%;
 }
