@@ -89,6 +89,7 @@ export class NameForm extends React.Component {
     }
 
 
+
     render() {
 
         return (
@@ -129,6 +130,7 @@ export class NameForm extends React.Component {
                             UserMainInfo={this.state.userLi}
                         />
                     }
+                    
                 </div>
             </div>
         )
