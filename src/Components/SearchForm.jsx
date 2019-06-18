@@ -18,15 +18,14 @@ class SearchForm extends  React.Component {
     render() {
         return(
             <form>
-                <label>Login
+                <label>Логин пользователя
                     <br/>
                     <input type="text" name="name" value={this.state.value} onChange={this.inputChange}/>
                     <br/>
                 </label>
 
-                <label>GetFolowers
-                    <br/>
-                   <input type="submit" name="submit" value="Get Folowers" onClick={this.props.inputSubmit}/>
+                <label>
+                   <input type="submit" name="submit" value="Найти" onClick={this.props.inputSubmit}/>
                     <br/>
                 </label>
                 <br/>

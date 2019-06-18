@@ -1,5 +1,4 @@
 import React from 'react';
-import logo, {ReactComponent} from './logo.svg';
 import './App.css';
 import SearchForm from "./Components/SearchForm";
 import Profile from "./Components/Profile";
@@ -13,29 +12,38 @@ export class NameForm extends React.Component {
             users: [],
             userLi: {},
             UserMainInfo: {},
-            FindedUser: [],
+            FendedUser: [],
         };
         this.inputChange = this.inputChange.bind(this);
         this.inputChangeSort = this.inputChangeSort.bind(this);
         this.inputSubmit = this.inputSubmit.bind(this);
+        this.SortList = this.SortList.bind(this);
     }
 
 
     inputChangeSort(event) {
-        console.log(event.target.value);
-
         var arSortChanges = [];
         this.state.users.filter(el => {
-            if ( el.login.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
+            if (el.login.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
                 arSortChanges.push(el);
+            return arSortChanges;
         });
-        this.setState({FindedUser:arSortChanges});
+        arSortChanges = arSortChanges.sort();
+        this.setState({FendedUser: arSortChanges});
+    }
+
+    SortList() {
+
+        var ArSorted = this.state.FendedUser;
+
+        const SortConst = (a, b) => ((a.login.toLowerCase() < b.login.toLowerCase()) ? -1 : (a.login.toLowerCase() > b.login.toLowerCase()) ? 1 : 0);
+
+        this.setState({FendedUser: ArSorted.sort(SortConst)});
     }
 
     inputChange(value) {
         this.setState({value})
     }
-
 
     inputSubmit(event) {
         event.preventDefault();
@@ -47,11 +55,9 @@ export class NameForm extends React.Component {
             })
             .then(UserMainInfo => {
                 this.setState({UserMainInfo});
-                console.log(UserMainInfo);
                 fetch(UserMainInfo.organizations_url).then(function (response) {
                     return response.json();
                 }).then(OrgInfo => {
-                    console.log(OrgInfo)
                 })
             })
             .catch(error => console.error(error));
@@ -61,8 +67,7 @@ export class NameForm extends React.Component {
                 return response.json();
             })
             .then(users => {
-                this.setState({users, FindedUser:users});
-                console.log(users);
+                this.setState({users: users, FendedUser: users});
 
             })
             .catch(error => console.error(error));
@@ -75,12 +80,9 @@ export class NameForm extends React.Component {
             })
             .then(userLi => {
                 this.setState({userLi});
-                console.log(userLi);
-                console.log(userLi.organizations_url);
                 fetch(userLi.organizations_url).then(function (response) {
                     return response.json();
                 }).then(OrgInfo => {
-                    console.log(OrgInfo)
                 })
             })
             .catch(error => console.error(error));
@@ -97,48 +99,41 @@ export class NameForm extends React.Component {
                     inputChange={(e) => this.inputChange(e)}
                     inputSubmit={(e) => this.inputSubmit(e)}
                 />
+                <div className={"UserWrap"}>
+
+                    {
+                        Object.keys(this.state.UserMainInfo).length > 0 &&
+                        <Profile
+                            UserMainInfo={this.state.UserMainInfo}
+                        />
+                    }
+
+                    {
+                        Object.keys(this.state.UserMainInfo).length > 0 &&
+                        <FollowerList users={this.state.FendedUser} onClick={(e) => this.LiClick(e)}>
+                            <p> Найти подписчиков<br/>
+                                <input type="text" className={"sortField"} onChange={this.inputChangeSort}/>
+                                <br/>
+                                <button onClick={this.SortList}>Сортировать по алфавиту</button>
+                            </p>
+                        </FollowerList>
+                    }
 
 
-                {
-                    Object.keys(this.state.UserMainInfo).length > 0 &&
-                    <Profile
-                        UserMainInfo={this.state.UserMainInfo}
-                    />
-                }
-                {
-                    this.state.FindedUser.length > 0 &&
-                    <FollowerList users={this.state.FindedUser} onClick={(e) => this.LiClick(e)}>
-                        <p> Find follower<br/>
-                            <input type="text" className={"sortField"} onChange={this.inputChangeSort}/>
-                        </p>
-                    </FollowerList>
-                }
+                </div>
+                <div className={"UserWrap"}>
+                    {
+                        Object.keys(this.state.userLi).length > 0 &&
 
-                {
-                    Object.keys(this.state.userLi).length > 0 &&
-
-                    <Profile
-                        UserMainInfo={this.state.userLi}
-                    />
-                }
+                        <Profile
+                            UserMainInfo={this.state.userLi}
+                        />
+                    }
+                </div>
             </div>
         )
     }
 }
 
 
-function App() {
-
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <div>
-                    <div id="button"></div>
-                </div>
-            </header>
-        </div>
-    );
-}
-
-export default App;
+export default NameForm;
