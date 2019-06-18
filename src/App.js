@@ -130,7 +130,7 @@ export class NameForm extends React.Component {
                             UserMainInfo={this.state.userLi}
                         />
                     }
-                    
+
                 </div>
             </div>
         )
